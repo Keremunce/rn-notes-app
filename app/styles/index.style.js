@@ -83,6 +83,12 @@ export default StyleSheet.create({
         fontWeight: "600",
         fontSize: 16,
     },
+    noteItem: {
+        borderRadius: 12,
+        padding: 16,
+        borderWidth: 1,
+        flex: 1,
+    }
 });
 export const COLORS = {
     primary: "#fb6500",
