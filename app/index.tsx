@@ -1,23 +1,21 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import React from "react";
+import { SafeAreaView, Text, View, TouchableOpacity } from "react-native";
+import styles, { COLORS } from "@/styles/index.style";
 
-const App = () => (
-    <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Welcome to RN Notes App!</Text>
-    </SafeAreaView>
-);
+export default function App() {
+	return (
+		<SafeAreaView style={styles.screen}>
+			<View style={styles.container}>
+				<Text style={styles.h1}>Notes App</Text>
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-});
+				<TouchableOpacity style={styles.button}>
+					<Text style={styles.buttonText}>Add Note</Text>
+				</TouchableOpacity>
 
-export default App;
+				{/* <View style={[styles.card, { backgroundColor: COLORS.dark.card }]}>
+					<Text style={styles.body}>This is a card example</Text>
+				</View> */}
+			</View>
+		</SafeAreaView>
+	);
+}
