@@ -10,6 +10,7 @@ import {
 	TextInput,
 	Keyboard,
 	TouchableWithoutFeedback,
+	Pressable,
 	FlatList,
 } from "react-native";
 import styles, { COLORS } from "@/styles/index.style";
@@ -42,23 +43,7 @@ export default function App() {
 		setNote("");
 	};
 	return (
-		<TouchableWithoutFeedback
-			onPress={() => {
-				if (Platform.OS === "web") {
-					const activeElement = document.activeElement as HTMLElement | null;
-					if (
-						activeElement &&
-						activeElement.tagName !== "TEXTAREA" &&
-						activeElement.tagName !== "INPUT"
-					) {
-						(activeElement as HTMLElement).blur();
-					}
-				} else {
-					Keyboard.dismiss();
-				}
-			}}
-			accessible={false}
-		>
+		
 			<SafeAreaView
 				style={[
 					styles.screen,
@@ -88,7 +73,6 @@ export default function App() {
 									theme === COLORS.light
 										? COLORS.light.background
 										: COLORS.dark.background,
-								flex: "flex",
 								flexDirection: "row",
 								gap: 16,
 								alignItems: "center",
@@ -214,6 +198,9 @@ export default function App() {
 							columnWrapperStyle={{ gap: 12 }}
 							contentContainerStyle={{ gap: 12, paddingBottom: 40 }}
 							style={{ flex: 1 }}
+							keyboardShouldPersistTaps="always"
+							contentInsetAdjustmentBehavior="automatic"
+							keyboardDismissMode="interactive"
 							renderItem={({ item }) => (
 								<View
 									style={[
@@ -286,6 +273,5 @@ export default function App() {
 					</View>
 				</View>
 			</SafeAreaView>
-		</TouchableWithoutFeedback>
 	);
 }
