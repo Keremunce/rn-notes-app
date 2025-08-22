@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-	Platform,
 	SafeAreaView,
 	Text,
 	View,
@@ -19,16 +18,33 @@ export default function App() {
 	const [theme, setTheme] = useState(
 		systemScheme === "dark" ? COLORS.dark : COLORS.light
 	);
-	const [isEnabled, setIsEnabled] = useState(true);
+	const [isLight, setIsLight] = useState(true);
 	const [notes, setNotes] = useState<Note[]>([]);
 	const [note, setNote] = useState<string>("");
 
 	const toggleSwitch = () => {
-		setIsEnabled((previousState) => !previousState);
+		setIsLight((previousState) => !previousState);
 		setTheme((prevTheme) =>
 			prevTheme === COLORS.dark ? COLORS.light : COLORS.dark
 		);
 	};
+
+	useEffect(() => {
+		(async () => {
+			const raw = await AsyncStorage.getItem("THEME_SWITCH");
+			if (raw != null) {
+				const enabled = JSON.parse(raw);
+				setIsLight(enabled);
+				setTheme(enabled ? COLORS.light : COLORS.dark);
+			}
+		})();
+	}, []);
+
+	useEffect(() => {
+		AsyncStorage.setItem("THEME_SWITCH", JSON.stringify(isLight)).catch(
+			() => {}
+		);
+	}, [isLight]);
 
 	const handleLoadNotes = async () => {
 		try {
@@ -44,12 +60,12 @@ export default function App() {
 		}
 	};
 
-	const saveNotes = async (newNotes) => {
-		try{
+	const saveNotes = async (newNotes: Note[]) => {
+		try {
 			const jsonValue = JSON.stringify(newNotes);
-			await AsyncStorage.setItem("NOTES",jsonValue);
-		} catch (e){
-			console.error("Save Notes: "+ e)
+			await AsyncStorage.setItem("NOTES", jsonValue);
+		} catch (e) {
+			console.error("Save Notes: " + e);
 		}
 	};
 
@@ -64,11 +80,11 @@ export default function App() {
 		setNote("");
 	};
 
-	const handleRemoveNote = (id) => {
+	const handleRemoveNote = (id: string) => {
 		const newNotes = notes.filter((item) => item.id !== id);
-		setNotes(newNotes)
+		setNotes(newNotes);
 		saveNotes(newNotes);
-	}
+	};
 
 	useEffect(() => {
 		handleLoadNotes();
@@ -130,7 +146,7 @@ export default function App() {
 										theme === COLORS.light
 											? COLORS.light.text
 											: COLORS.dark.text,
-									opacity: isEnabled ? 0.5 : 1, // Light text fades when disabled
+									opacity: isLight ? 0.5 : 1, // Light text fades when disabled
 								},
 							]}
 						>
@@ -138,10 +154,10 @@ export default function App() {
 						</Text>
 						<Switch
 							trackColor={{ false: "#787880", true: "#34C759" }}
-							thumbColor={isEnabled ? "#fff" : "#fff"}
+							thumbColor={isLight ? "#fff" : "#fff"}
 							ios_backgroundColor="#3e3e3e"
 							onValueChange={toggleSwitch}
-							value={isEnabled}
+							value={isLight}
 						/>
 						<Text
 							style={[
@@ -151,7 +167,7 @@ export default function App() {
 										theme === COLORS.light
 											? COLORS.light.text
 											: COLORS.dark.text,
-									opacity: isEnabled ? 1 : 0.5, // Dark text fades when disabled
+									opacity: isLight ? 1 : 0.5, // Dark text fades when disabled
 								},
 							]}
 						>
@@ -192,6 +208,7 @@ export default function App() {
 						returnKeyType="done"
 						multiline={false}
 						textAlignVertical="top"
+						clearButtonMode="while-editing"
 					/>
 				</View>
 				<View>
@@ -219,7 +236,7 @@ export default function App() {
 				<View style={{ flex: 1 }}>
 					<FlatList
 						data={notes}
-						keyExtractor={(item, index) => index.toString()}
+						keyExtractor={(item) => item.id}
 						numColumns={2}
 						columnWrapperStyle={{ gap: 12 }}
 						contentContainerStyle={{ gap: 12, paddingBottom: 40 }}
@@ -285,10 +302,9 @@ export default function App() {
 											theme === COLORS.light
 												? COLORS.light.subtext
 												: COLORS.dark.subtext,
-										fontSize: 12,
 									}}
 								>
-									— End of the list —
+									- There are no notes. Add one. -
 								</Text>
 							</View>
 						)}
