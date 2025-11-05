@@ -3,8 +3,6 @@
 A lightweight **React** web calculator supporting basic arithmetic operations.  
 Styled with **Tailwind CSS** and deployed via **GitHub Pages** for instant public access.
 
-![Preview](assets/preview.png) <!-- replace with your own screenshot path -->
-
 ---
 
 ## ✨ Features
