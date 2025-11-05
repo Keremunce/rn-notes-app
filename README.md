@@ -1,71 +1,85 @@
-# 📒 Notes App (React Native + Expo)
+# 🧮 React Calculator App
 
-A simple Notes application built with **React Native** and **Expo Router**.  
-This project is part of my learning journey, but it’s also structured as a small portfolio app.
+A lightweight **React** web calculator supporting basic arithmetic operations.  
+Styled with **Tailwind CSS** and deployed via **GitHub Pages** for instant public access.
+
+![Preview](assets/preview.png) <!-- replace with your own screenshot path -->
 
 ---
 
 ## ✨ Features
-
-- Add notes with a text input and button
-- Display notes in a list (`FlatList`)
-- Store notes locally using **AsyncStorage** so they persist after closing the app
-- Delete notes with a single tap
-- _(Optional)_ Mark notes as completed (strike-through style)
-- _(Optional)_ Dark/Light mode toggle
+- Perform basic arithmetic operations (add, subtract, multiply, divide)
+- Clear and responsive layout built with Tailwind CSS
+- Real-time display updates as you type
+- Keyboard input support (optional improvement)
+- Deployed to GitHub Pages for live demo access
 
 ---
 
-## 🚀 Tech Stack
-
-- [Expo](https://expo.dev/) (with Expo Router)
-- [React Native](https://reactnative.dev/)
-- AsyncStorage for local storage
-
----
-
-## 📂 Project Structure
-
-app/
-├─ \_layout.tsx → Main layout for navigation
-├─ index.tsx → Home screen (input + notes list)
+## 🧰 Tech Stack
+![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?logo=githubpages&logoColor=white)
 
 ---
 
-## ▶️ Getting Started
+## 🚀 Getting Started
 
-1. Clone the repository:
+Follow these steps to run the project locally:
 
-   ```bash
-   git clone https://github.com/your-username/notes-app.git
-   cd notes-app
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/Keremunce/react-calculator-app.git
 
-2. Install dependencies:
-   ```
-   npm install
-   ```
-3. Run the app:
+# Navigate into the folder
+cd react-calculator-app
 
-   ```
-   npx expo start
-   ```
+# Install dependencies
+npm install
 
-4. Open it on your phone using the Expo Go app, or on an emulator.
+# Run the development server
+npm start
+```
 
-📝 Practice Goals
+To build and deploy on GitHub Pages:
 
-This project is built to strengthen my React Native & Expo basics:
+```bash
+npm run build
+npm run deploy
+```
 
--State management
--List rendering with FlatList
--Local persistence with AsyncStorage
--Navigation with Expo Router
--Styling for both light and dark themes
+---
 
-📌 Future Improvements
+## 🧩 Project Structure
 
--Edit notes
--Categorize notes
--Sync with a backend (Firebase / Supabase)
--Share notes
+```
+react-calculator-app/
+│
+├── public/
+│   └── index.html
+│
+├── src/
+│   ├── components/
+│   │   ├── Button.jsx
+│   │   ├── Display.jsx
+│   │   └── Calculator.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+│
+├── package.json
+└── tailwind.config.js
+```
+
+---
+
+## 🌐 Live Demo
+🔗 [Open on GitHub Pages](https://keremunce.github.io/react-calculator-app)
+
+---
+
+## 📜 License
+MIT License © [Kerem ÜNCE](https://github.com/Keremunce)
